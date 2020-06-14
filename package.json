@@ -1,0 +1,28 @@
+{
+  "name": "imp-lang",
+  "author": "Kyriacos Souroullas",
+  "scripts": {
+    "test": "ava"
+  },
+  "devDependencies": {
+    "ava": "^3.9.0"
+  },
+  "version": "1.0.0",
+  "description": "Implementation of Imp language in Javascript",
+  "main": "index.js",
+  "dependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kyriacos/imp-lang.git"
+  },
+  "keywords": [
+    "compilers",
+    "compiler",
+    "interpreter"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kyriacos/imp-lang/issues"
+  },
+  "homepage": "https://github.com/kyriacos/imp-lang#readme"
+}

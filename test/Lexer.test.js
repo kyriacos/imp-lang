@@ -1,5 +1,5 @@
 import test from 'ava';
-import { TOKEN_EXPS } from '../Lexer.js';
+import Lexer, { TOKEN_EXPS } from '../Lexer.js';
 
 test('Regular Expression Patterns compile correctly', t => {
   const macro = (t, input, _) =>
@@ -11,4 +11,18 @@ test('Regular Expression Patterns compile correctly', t => {
     macro(t, pattern);
   });
   t.pass();
+});
+
+test('It lexes the test file correctly', t => {
+  const impStr = `
+  n := 5;
+  p := 1;
+  while n > 0 do
+    p := p * n;
+    n := n - 1
+  end
+  `;
+
+  const l = new Lexer(impStr);
+  t.snapshot(l.lex());
 });

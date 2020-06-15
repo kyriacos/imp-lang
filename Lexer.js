@@ -42,7 +42,6 @@ export default class Lexer {
     let tokens = [];
 
     while (position < this.characters.length) {
-      console.log(position, this.characters.length);
       let match = null;
       let regex = null;
 

@@ -1,40 +1,45 @@
-const RESERVED = 'RESERVED';
-const INT = 'INT';
-const ID = 'ID';
+export const TYPES = {
+  RESERVED: 'RESERVED',
+  INT: 'INT',
+  ID: 'ID',
+};
+
+const { RESERVED, INT, ID } = TYPES;
 
 export const TOKEN_EXPS = [
-  [/[ \n\t]+]/, null],
-  [/#[^\n]*/, null],
-  [/\:=/, RESERVED],
-  [/\(/, RESERVED],
-  [/\)/, RESERVED],
-  [/;/, RESERVED],
-  [/\\+/, RESERVED],
-  [/-/, RESERVED],
-  [/\\*/, RESERVED],
-  [/\//, RESERVED],
-  [/<=/, RESERVED],
-  [/</, RESERVED],
-  [/>=/, RESERVED],
-  [/>/, RESERVED],
-  [/=/, RESERVED],
-  [/!=/, RESERVED],
-  [/and/, RESERVED],
-  [/or/, RESERVED],
-  [/not/, RESERVED],
-  [/if/, RESERVED],
-  [/then/, RESERVED],
-  [/else/, RESERVED],
-  [/while/, RESERVED],
-  [/do/, RESERVED],
-  [/end/, RESERVED],
-  [/[0-9]+/, INT],
-  [/[A-Za-z][A-Za-z0-9_]*/, ID],
+  [/^[\s\n\t]+/, null],
+  [/^#[^\n]*/, null],
+  [/^:=/, RESERVED],
+  [/^\(/, RESERVED],
+  [/^\)/, RESERVED],
+  [/^;/, RESERVED],
+  [/^\+/, RESERVED],
+  [/^-/, RESERVED],
+  [/^\*/, RESERVED],
+  [/^\//, RESERVED],
+  [/^<=/, RESERVED],
+  [/^</, RESERVED],
+  [/^>=/, RESERVED],
+  [/^>/, RESERVED],
+  [/^=/, RESERVED],
+  [/^!=/, RESERVED],
+  [/^and/, RESERVED],
+  [/^or/, RESERVED],
+  [/^not/, RESERVED],
+  [/^if/, RESERVED],
+  [/^then/, RESERVED],
+  [/^else/, RESERVED],
+  [/^while/, RESERVED],
+  [/^do/, RESERVED],
+  [/^end/, RESERVED],
+  [/^[0-9]+/, INT],
+  [/^[A-Za-z][A-Za-z0-9_]*/, ID],
 ];
 
 export default class Lexer {
   constructor(characters) {
     this.characters = characters;
+    this.position = 0;
   }
 
   lex() {
@@ -55,13 +60,13 @@ export default class Lexer {
             let token = [text, tag];
             tokens.push(token);
           }
+          break;
         }
       }
       if (!match) {
         throw new Error('Illegal character: ', this.characters[position]);
       } else {
-        position = regex.lastIndex;
-        if (position === 0) return tokens;
+        position = position + match[0].length;
       }
     }
 
